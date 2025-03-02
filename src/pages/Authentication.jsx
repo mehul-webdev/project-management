@@ -1,6 +1,5 @@
 import React from "react";
-import ProjectManagement from "../assets/project-management.png";
-import Logo from "../assets/project-management-logo.png";
+import Logo from "/assets/project-management-logo.png";
 import SignIn from "../components/SignIn";
 
 const Authentication = () => {

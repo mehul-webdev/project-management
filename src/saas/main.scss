@@ -15,6 +15,7 @@ body {
 .logo {
   width: 4rem;
   height: 4rem;
+  color: colors.$primary-color;
 }
 
 .btn {
@@ -85,7 +86,7 @@ body {
   input {
     position: relative;
     height: 2.3rem;
-    padding: 0.5rem 0.5rem 0.5rem 2.2rem;
+    padding: 0.5rem 2.2rem;
     border-radius: 0.4rem;
     border: 1px solid colors.$gray;
     background-color: transparent;
@@ -99,11 +100,19 @@ body {
     }
   }
 
-  &--icon {
+  &--start-icon {
     position: absolute;
     top: 2.3rem;
     left: 1rem;
     font-size: 12px;
+  }
+
+  &--end-icon {
+    position: absolute;
+    top: 2.3rem;
+    right: 1rem;
+    font-size: 12px;
+    cursor: pointer;
   }
 }
 

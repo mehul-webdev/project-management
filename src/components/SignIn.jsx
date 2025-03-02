@@ -1,14 +1,13 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
-import { FaFacebook } from "react-icons/fa";
-import { FaGoogle } from "react-icons/fa";
-import { FaRegUser } from "react-icons/fa";
-import { IoKeyOutline } from "react-icons/io5";
+import { Formik } from "formik";
+import { FaFacebook, FaGoogle } from "react-icons/fa";
+import { FaRegUser } from "react-icons/fa6";
+import TextInput from "./TextInput";
+import PasswordInput from "./PasswordInput";
 
 const SignIn = () => {
   const handleLogin = (values, setSubmitting) => {
     setTimeout(() => {
-      alert(JSON.stringify(values, null, 2)); // Replace this with actual API call
       setSubmitting(false);
     }, 400);
   };
@@ -35,7 +34,7 @@ const SignIn = () => {
       <button className="btn white-btn authentication--form__btn">
         <FaGoogle /> <span>Sign in with google</span>
       </button>
-      <div class="divider-with-text">
+      <div className="divider-with-text">
         <hr />
         <span>or use email</span>
         <hr />
@@ -43,9 +42,9 @@ const SignIn = () => {
 
       <Formik
         initialValues={{ email: "", password: "" }}
-        onSubmit={(values, { setSubmitting }) =>
-          handleLogin(values, setSubmitting)
-        }
+        onSubmit={(values, { setSubmitting }) => {
+          handleLogin(values, setSubmitting);
+        }}
         validate={(values) => handleValidation(values)}
       >
         {(formik) => (
@@ -53,26 +52,28 @@ const SignIn = () => {
             onSubmit={formik.handleSubmit}
             className="authentication--form__inputs"
           >
-            <div className="input-group">
-              <label htmlFor="email">EMAIL ADDRESS</label>
-              <input
-                type="text"
-                name="email"
-                id="email"
-                placeholder="name@example.com"
-              />
-              <FaRegUser className="input-group--icon" />
-            </div>
-            <div className="input-group">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Password"
-              />
-              <IoKeyOutline className="input-group--icon" />
-            </div>
+            <TextInput
+              label="EMAIL ADDRESS"
+              type="text"
+              name="email"
+              id="email"
+              placeholder="name@example.com"
+              value={formik.values.email}
+              handleOnChange={formik.handleChange}
+              handleOnBlur={formik.handleBlur}
+              Icon={FaRegUser}
+            />
+
+            <PasswordInput
+              label="Password"
+              name="password"
+              id="password"
+              placeholder="Password"
+              value={formik.values.password}
+              handleOnChange={formik.handleChange}
+              handleOnBlur={formik.handleBlur}
+            />
+
             <div className="authentication--form__actions">
               <div className="input-inline">
                 <input type="checkbox" name="rememberMe" id="rememberMe" />
@@ -82,7 +83,13 @@ const SignIn = () => {
                 Forget Password
               </a>
             </div>
-            <button className="btn btn-primary margin-4">Sign In</button>
+            <button
+              className="btn btn-primary margin-4"
+              type="submit"
+              disabled={formik.isSubmitting}
+            >
+              Sign In
+            </button>
             <a href="#" className="authentication--form__create-link link">
               Create an account
             </a>
