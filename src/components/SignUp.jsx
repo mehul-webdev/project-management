@@ -12,10 +12,11 @@ const SignUp = () => {
         <p>Create your account today</p>
       </div>
       <button className="btn white-btn authentication--form__btn">
-        <FaFacebook /> <span>Sign in with facebook</span>
+        <FaFacebook className="facebook-icon" />{" "}
+        <span>Sign in with facebook</span>
       </button>
       <button className="btn white-btn authentication--form__btn">
-        <FaGoogle /> <span>Sign in with google</span>
+        <FaGoogle className="gooogle-icon" /> <span>Sign in with google</span>
       </button>
       <div className="divider-with-text">
         <hr />
