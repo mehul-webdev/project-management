@@ -1,43 +1,50 @@
-# Created by https://www.toptal.com/developers/gitignore/api/node,windows,macos
-# Edit at https://www.toptal.com/developers/gitignore?templates=node,windows,macos
+# Created by https://www.toptal.com/developers/gitignore/api/node,java,windows,linux
+# Edit at https://www.toptal.com/developers/gitignore?templates=node,java,windows,linux
 
-### macOS ###
-# General
-.DS_Store
-.AppleDouble
-.LSOverride
+### Java ###
+# Compiled class file
+*.class
 
-# Icon must end with two \r
-Icon
+# Log file
+*.log
 
+# BlueJ files
+*.ctxt
 
-# Thumbnails
-._*
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
 
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
 
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+replay_pid*
 
-### macOS Patch ###
-# iCloud generated files
-*.icloud
+### Linux ###
+*~
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
 
 ### Node ###
 # Logs
 logs
-*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -200,4 +207,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/node,windows,macos
+# End of https://www.toptal.com/developers/gitignore/api/node,java,windows,linux
