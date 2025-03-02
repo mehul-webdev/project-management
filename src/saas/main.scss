@@ -1,0 +1,137 @@
+@use "colors";
+@use "authentication";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: colors.$background-color;
+}
+
+.logo {
+  width: 4rem;
+  height: 4rem;
+}
+
+.btn {
+  border: none;
+  outline: none;
+  border-radius: 0.2rem;
+  width: 100%;
+  padding: 0.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.white-btn {
+  border: 1px solid #00000034;
+  background-color: transparent;
+  &:hover {
+    background-color: colors.$gray;
+  }
+}
+
+.btn-primary {
+  outline: 0;
+  border: 1px solid colors.$primary-color;
+  background-color: colors.$primary-color-light;
+  color: colors.$white;
+
+  &:hover {
+    background-color: colors.$primary-color;
+  }
+}
+
+.divider-with-text {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  hr {
+    flex: 1;
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+  }
+
+  span {
+    margin: 0 0.6rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  position: relative;
+
+  label {
+    font-size: 0.7rem;
+    margin-left: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: colors.$text-light;
+    font-weight: 600;
+  }
+
+  input {
+    position: relative;
+    height: 2.3rem;
+    padding: 0.5rem 0.5rem 0.5rem 2.2rem;
+    border-radius: 0.4rem;
+    border: 1px solid colors.$gray;
+    background-color: transparent;
+
+    &:focus {
+      border: 1px solid colors.$primary-color-light;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0),
+        inset 0 0 0 20px colors.$gray,
+        0 0 0 0.25rem rgba(colors.$primary-color-light, 0.5);
+      outline: 0;
+    }
+  }
+
+  &--icon {
+    position: absolute;
+    top: 2.3rem;
+    left: 1rem;
+    font-size: 12px;
+  }
+}
+
+.input-inline {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  label {
+    font-size: 0.8rem;
+    color: colors.$text-light;
+    font-weight: 500;
+  }
+}
+
+a {
+  text-decoration: none;
+  font-weight: normal;
+}
+
+.margin-2 {
+  margin-bottom: 2rem;
+}
+
+.link {
+  color: colors.$primary-color;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
