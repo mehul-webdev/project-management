@@ -15,6 +15,7 @@ const TextInput = ({
     <div className="input-group">
       <label htmlFor="email">{label}</label>
       <input
+        className={Icon ? "input-with-icon" : "input-without-icon"}
         type={type}
         name={name}
         id={id}
@@ -23,7 +24,7 @@ const TextInput = ({
         onChange={handleOnChange}
         onBlur={handleOnBlur}
       />
-      <Icon className="input-group--start-icon" />
+      {Icon && <Icon className="input-group--start-icon" />}
     </div>
   );
 };

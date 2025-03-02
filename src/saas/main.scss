@@ -32,9 +32,10 @@ body {
 }
 
 .white-btn {
-  border: 1px solid #00000034;
+  border: 1px solid colors.$gray;
   background-color: transparent;
   &:hover {
+    outline: 0;
     background-color: colors.$gray;
   }
 }
@@ -77,7 +78,7 @@ body {
 
   label {
     font-size: 0.7rem;
-    margin-left: 0.5rem;
+    margin-left: 1rem;
     margin-bottom: 0.5rem;
     color: colors.$text-light;
     font-weight: 600;
@@ -86,7 +87,6 @@ body {
   input {
     position: relative;
     height: 2.3rem;
-    padding: 0.5rem 2.2rem;
     border-radius: 0.4rem;
     border: 1px solid colors.$gray;
     background-color: transparent;
@@ -100,6 +100,14 @@ body {
     }
   }
 
+  input.input-with-icon {
+    padding: 0.5rem 2rem;
+  }
+
+  input.input-without-icon {
+    padding: 0.5rem 1rem;
+  }
+
   &--start-icon {
     position: absolute;
     top: 2.3rem;
@@ -110,7 +118,7 @@ body {
   &--end-icon {
     position: absolute;
     top: 2.3rem;
-    right: 1rem;
+    right: 0.7rem;
     font-size: 12px;
     cursor: pointer;
   }
@@ -130,7 +138,12 @@ body {
 
 a {
   text-decoration: none;
-  font-weight: normal;
+  font-weight: bold;
+  color: colors.$primary-color;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .margin-2 {

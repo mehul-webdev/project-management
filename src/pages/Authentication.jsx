@@ -1,6 +1,7 @@
 import React from "react";
 import Logo from "/assets/project-management-logo.png";
 import SignIn from "../components/SignIn";
+import SignUp from "../components/SignUp";
 
 const Authentication = () => {
   return (
@@ -9,7 +10,8 @@ const Authentication = () => {
       <div className="authentication--container">
         <div className="authentication--form">
           <img src={Logo} alt="project-logo" className="logo" />
-          <SignIn />
+          {/* <SignIn /> */}
+          <SignUp />
         </div>
       </div>
     </div>

@@ -10,6 +10,7 @@ const PasswordInput = ({
   value,
   handleOnChange,
   handleOnBlur,
+  Icon,
 }) => {
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -24,6 +25,7 @@ const PasswordInput = ({
       <label htmlFor="password">{label}</label>
       <input
         type={inputType}
+        className={Icon ? "input-with-icon" : "input-without-icon"}
         name={name}
         id={id}
         placeholder={placeholder}
@@ -31,7 +33,8 @@ const PasswordInput = ({
         onChange={handleOnChange}
         onBlur={handleOnBlur}
       />
-      <IoKeyOutline className="input-group--start-icon" />
+      {Icon && <Icon className="input-group--start-icon" />}
+
       {showPassword ? (
         <FaEyeSlash
           className="input-group--end-icon"

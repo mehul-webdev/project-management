@@ -4,6 +4,7 @@ import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { FaRegUser } from "react-icons/fa6";
 import TextInput from "./TextInput";
 import PasswordInput from "./PasswordInput";
+import { IoKeyOutline } from "react-icons/io5";
 
 const SignIn = () => {
   const handleLogin = (values, setSubmitting) => {
@@ -72,6 +73,7 @@ const SignIn = () => {
               value={formik.values.password}
               handleOnChange={formik.handleChange}
               handleOnBlur={formik.handleBlur}
+              Icon={IoKeyOutline}
             />
 
             <div className="authentication--form__actions">
