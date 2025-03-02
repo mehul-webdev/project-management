@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "/assets/project-management-logo.png";
+import Logo from "../assets/project-management-logo.png";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
 
