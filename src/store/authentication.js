@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   handleSignInWithEmailAndPassword,
+  handleSignUpWithGoogle,
   handleSingUpWithEmailAndPassword,
 } from "./authenticationHelper";
 
 const authInitialState = {
-  isLogin: false,
   user: {},
   error: null,
   loading: false,
@@ -14,14 +14,22 @@ const authInitialState = {
 const authenticationSlice = createSlice({
   name: "authentication",
   initialState: authInitialState,
-  reducers: {},
+  reducers: {
+    handleUpdateUser(state, action) {
+      state.user = action.payload;
+      state.error = null;
+      state.loading = false;
+    },
+    clearUser(state) {
+      state.user = {};
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(
       handleSignInWithEmailAndPassword.fulfilled,
       (state, action) => {
         state.loading = false;
         state.user = action.payload;
-        state.isLogin = true;
       }
     );
     builder.addCase(
@@ -37,7 +45,6 @@ const authenticationSlice = createSlice({
       (state, action) => {
         state.loading = false;
         state.user = action.payload;
-        state.isLogin = true;
       }
     );
     builder.addCase(
@@ -47,8 +54,14 @@ const authenticationSlice = createSlice({
         state.error = action.payload;
       }
     );
+    builder.addCase(handleSignUpWithGoogle.fulfilled, (state, action) => {
+      state.loading = false;
+      state.user = action.payload;
+    });
   },
 });
+
+export const authAction = authenticationSlice.actions;
 
 export default authenticationSlice.reducer;
 

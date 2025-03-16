@@ -1,9 +1,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   createUserWithEmailAndPassword,
+  GithubAuthProvider,
+  GoogleAuthProvider,
   signInWithEmailAndPassword,
+  signInWithPopup,
 } from "firebase/auth";
-import { auth, db } from "../config/firebaseConfig";
+import {
+  auth,
+  db,
+  googleProvider,
+  githubProvider,
+} from "../config/firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 
 export const getUserUsingUid = async (uid) => {
@@ -56,6 +64,91 @@ export const handleSingUpWithEmailAndPassword = createAsyncThunk(
     } catch (error) {
       console.log("Error while login", error);
       return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const handleSignUpWithGoogle = createAsyncThunk(
+  "authentication/handleSignUpWithGoogle",
+  async (_, { rejectWithValue }) => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      if (!credential) {
+        console.error("Error in user Credential");
+        return rejectWithValue("Error in user Credential");
+      }
+
+      const user = result.user;
+
+      const uid = user.uid;
+
+      if (user) {
+        await setDoc(doc(db, "Users", uid), {
+          email: user.email,
+          name: user.displayName,
+        });
+      }
+      return {
+        email: user.email,
+        name: user.displayName,
+      };
+    } catch (e) {
+      console.log("Error while sign up with google", e);
+    }
+  }
+);
+
+export const handleSignInWithGoogle = createAsyncThunk(
+  "authentication/handleSignInWithGoogle",
+  async (_, { rejectWithValue }) => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+
+      const user = result.user;
+
+      if (user) {
+        const uid = user.uid;
+        const userData = await getUserUsingUid(uid);
+        return userData;
+      } else {
+        return rejectWithValue("No user available");
+      }
+    } catch (e) {
+      console.log("error while login using google", e);
+    }
+  }
+);
+
+export const handleSignUpWithGithub = createAsyncThunk(
+  "authentication/handleSignUpWithGithub",
+  async (_, { rejectWithValue }) => {
+    try {
+      const result = await signInWithPopup(auth, githubProvider);
+
+      const credential = GithubAuthProvider.credentialFromResult(result);
+      if (!credential) {
+        console.error("Error in user Credential");
+        return rejectWithValue("Error in user Credential");
+      }
+
+      const user = result.user;
+
+      const uid = user.uid;
+
+      if (user) {
+        await setDoc(doc(db, "Users", uid), {
+          email: user.email,
+          name: user.displayName,
+        });
+      }
+      return {
+        email: user.email,
+        name: user.displayName,
+      };
+    } catch (e) {
+      console.log("Error while singup with github", e);
     }
   }
 );

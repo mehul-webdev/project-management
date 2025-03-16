@@ -1,0 +1,35 @@
+@use "colors";
+
+.main-nav {
+  width: 100%;
+  height: 4.5rem;
+  background-color: colors.$gray;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 0 1rem;
+
+  &__details {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    &--logo {
+      width: 50px;
+      height: 50px;
+    }
+
+    &--hamburger {
+      font-size: 1.5rem;
+    }
+  }
+
+  &__actions {
+    &--profile {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+  }
+}

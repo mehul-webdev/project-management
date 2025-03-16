@@ -1,5 +1,10 @@
-@use "colors";
-@use "authentication";
+// @use "colors";
+// @use "authentication";
+// @use "mainNavigation";
+
+// @plugin "tailwindcss-animate";
+
+// @custom-variant dark (&:is(.dark *));
 
 * {
   margin: 0;
@@ -7,176 +12,176 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: "Poppins", sans-serif;
-  background-color: colors.$background-color;
-}
+// body {
+//   font-family: "Poppins", sans-serif;
+//   background-color: colors.$background-color;
+// }
 
-.logo {
-  width: 4rem;
-  height: 4rem;
-  color: colors.$primary-color;
-}
+// .logo {
+//   width: 4rem;
+//   height: 4rem;
+//   color: colors.$primary-color;
+// }
 
-.btn {
-  border: none;
-  outline: none;
-  border-radius: 0.2rem;
-  width: 100%;
-  padding: 0.6rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
+// .btn {
+//   border: none;
+//   outline: none;
+//   border-radius: 0.2rem;
+//   width: 100%;
+//   padding: 0.6rem;
+//   cursor: pointer;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   gap: 0.5rem;
+// }
 
-.white-btn {
-  border: 1px solid colors.$gray;
-  background-color: transparent;
-  &:hover {
-    outline: 0;
-    background-color: colors.$gray;
-  }
-}
+// .white-btn {
+//   border: 1px solid colors.$gray;
+//   background-color: transparent;
+//   &:hover {
+//     outline: 0;
+//     background-color: colors.$gray;
+//   }
+// }
 
-.btn-primary {
-  outline: 0;
-  border: 1px solid colors.$primary-color;
-  background-color: colors.$primary-color-light;
-  color: colors.$white;
+// .btn-primary {
+//   outline: 0;
+//   border: 1px solid colors.$primary-color;
+//   background-color: colors.$primary-color-light;
+//   color: colors.$white;
 
-  &:hover {
-    background-color: colors.$primary-color;
-  }
-}
+//   &:hover {
+//     background-color: colors.$primary-color;
+//   }
+// }
 
-.divider-with-text {
-  display: flex;
-  align-items: center;
-  width: 100%;
+// .divider-with-text {
+//   display: flex;
+//   align-items: center;
+//   width: 100%;
 
-  hr {
-    flex: 1;
-    border: none;
-    height: 1px;
-    background-color: #ccc;
-  }
+//   hr {
+//     flex: 1;
+//     border: none;
+//     height: 1px;
+//     background-color: #ccc;
+//   }
 
-  span {
-    margin: 0 0.6rem;
-    font-size: 0.8rem;
-    white-space: nowrap;
-  }
-}
+//   span {
+//     margin: 0 0.6rem;
+//     font-size: 0.8rem;
+//     white-space: nowrap;
+//   }
+// }
 
-.input-group {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  position: relative;
+// .input-group {
+//   display: flex;
+//   flex-direction: column;
+//   flex-wrap: nowrap;
+//   position: relative;
 
-  label {
-    font-size: 0.7rem;
-    margin-left: 1rem;
-    margin-bottom: 0.5rem;
-    color: colors.$text-light;
-    font-weight: 600;
-  }
+//   label {
+//     font-size: 0.7rem;
+//     margin-left: 1rem;
+//     margin-bottom: 0.5rem;
+//     color: colors.$text-light;
+//     font-weight: 600;
+//   }
 
-  input {
-    position: relative;
-    height: 2.3rem;
-    border-radius: 0.4rem;
-    border: 1px solid colors.$gray;
-    background-color: transparent;
+//   input {
+//     position: relative;
+//     height: 2.3rem;
+//     border-radius: 0.4rem;
+//     border: 1px solid colors.$gray;
+//     background-color: transparent;
 
-    &:focus {
-      border: 1px solid colors.$primary-color-light;
-      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0),
-        inset 0 0 0 20px colors.$gray,
-        0 0 0 0.25rem rgba(colors.$primary-color-light, 0.5);
-      outline: 0;
-    }
+//     &:focus {
+//       border: 1px solid colors.$primary-color-light;
+//       box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0),
+//         inset 0 0 0 20px colors.$gray,
+//         0 0 0 0.25rem rgba(colors.$primary-color-light, 0.5);
+//       outline: 0;
+//     }
 
-    &.error {
-      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0),
-        inset 0 0 0 20px colors.$gray, 0 0 0 0.25rem rgba(red, 0.25);
-      border-color: red;
-    }
-  }
+//     &.error {
+//       box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0),
+//         inset 0 0 0 20px colors.$gray, 0 0 0 0.25rem rgba(red, 0.25);
+//       border-color: red;
+//     }
+//   }
 
-  input.input-with-icon {
-    padding: 0.5rem 2rem;
-  }
+//   input.input-with-icon {
+//     padding: 0.5rem 2rem;
+//   }
 
-  input.input-without-icon {
-    padding: 0.5rem 1rem;
-  }
+//   input.input-without-icon {
+//     padding: 0.5rem 1rem;
+//   }
 
-  &--start-icon {
-    position: absolute;
-    top: 2.3rem;
-    left: 1rem;
-    font-size: 12px;
-  }
+//   &--start-icon {
+//     position: absolute;
+//     top: 2.3rem;
+//     left: 1rem;
+//     font-size: 12px;
+//   }
 
-  &--end-icon {
-    position: absolute;
-    top: 2.3rem;
-    right: 0.7rem;
-    font-size: 12px;
-    cursor: pointer;
-  }
+//   &--end-icon {
+//     position: absolute;
+//     top: 2.3rem;
+//     right: 0.7rem;
+//     font-size: 12px;
+//     cursor: pointer;
+//   }
 
-  &--error-message {
-    margin-top: 0.3rem;
-    font-size: 0.8rem;
-    color: colors.$red;
-  }
+//   &--error-message {
+//     margin-top: 0.3rem;
+//     font-size: 0.8rem;
+//     color: colors.$red;
+//   }
 
-  &--mandatory {
-    color: colors.$red;
-  }
-}
+//   &--mandatory {
+//     color: colors.$red;
+//   }
+// }
 
-.input-inline {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+// .input-inline {
+//   display: flex;
+//   align-items: center;
+//   gap: 0.5rem;
 
-  label {
-    font-size: 0.8rem;
-    color: colors.$text-light;
-    font-weight: 500;
-  }
-}
+//   label {
+//     font-size: 0.8rem;
+//     color: colors.$text-light;
+//     font-weight: 500;
+//   }
+// }
 
-a {
-  text-decoration: none;
-  font-weight: bold;
-  color: colors.$primary-color;
+// a {
+//   text-decoration: none;
+//   font-weight: bold;
+//   color: colors.$primary-color;
 
-  &:hover {
-    text-decoration: underline;
-  }
-}
+//   &:hover {
+//     text-decoration: underline;
+//   }
+// }
 
-.margin-2 {
-  margin-bottom: 2rem;
-}
+// .margin-2 {
+//   margin-bottom: 2rem;
+// }
 
-.link {
-  color: colors.$primary-color;
+// .link {
+//   color: colors.$primary-color;
 
-  &:hover {
-    text-decoration: underline;
-  }
-}
+//   &:hover {
+//     text-decoration: underline;
+//   }
+// }
 
-.facebook-icon {
-  color: colors.$facebook;
-}
-.gooogle-icon {
-  color: colors.$google;
-}
+// .facebook-icon {
+//   color: colors.$facebook;
+// }
+// .gooogle-icon {
+//   color: colors.$google;
+// }

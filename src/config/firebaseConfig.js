@@ -1,21 +1,23 @@
 import { getFirestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBQW3HfBCUIn6fAawvtaQ2Y7s_F_TEFgBY",
-  authDomain: "project-management-2b569.firebaseapp.com",
-  projectId: "project-management-2b569",
-  storageBucket: "project-management-2b569.firebasestorage.app",
-  messagingSenderId: "1019651997735",
-  appId: "1:1019651997735:web:9cd830c1389411b15f0e02",
-  measurementId: "G-Z4GCFVSF0R",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const googleProvider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider();
 
-export { app, auth, db };
+export { app, auth, db, googleProvider, githubProvider };
 // const analytics = getAnalytics(app);
