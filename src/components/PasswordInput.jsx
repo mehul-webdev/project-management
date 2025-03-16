@@ -1,6 +1,5 @@
 import React from "react";
 import { FaEyeSlash, FaRegEye } from "react-icons/fa";
-import { IoKeyOutline } from "react-icons/io5";
 
 const PasswordInput = ({
   label,
@@ -11,6 +10,8 @@ const PasswordInput = ({
   handleOnChange,
   handleOnBlur,
   Icon,
+  error,
+  isRequired = false,
 }) => {
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -20,18 +21,26 @@ const PasswordInput = ({
 
   const inputType = showPassword ? "text" : "password";
 
+  const inputClassName = Icon
+    ? `input-with-icon ${error?.isError ? "error" : undefined}`
+    : `input-without-icon ${error?.isError ? "error" : undefined}`;
+
   return (
     <div className="input-group">
-      <label htmlFor="password">{label}</label>
+      <label htmlFor="password">
+        {label}{" "}
+        {isRequired && <span className="input-group--mandatory">*</span>}
+      </label>
       <input
         type={inputType}
-        className={Icon ? "input-with-icon" : "input-without-icon"}
+        className={inputClassName}
         name={name}
         id={id}
         placeholder={placeholder}
         value={value}
         onChange={handleOnChange}
         onBlur={handleOnBlur}
+        autoComplete={"true"}
       />
       {Icon && <Icon className="input-group--start-icon" />}
 
@@ -45,6 +54,9 @@ const PasswordInput = ({
           className="input-group--end-icon"
           onClick={handleShowPassword}
         />
+      )}
+      {error?.isError && (
+        <span className="input-group--error-message">{error.errorMessage}</span>
       )}
     </div>
   );

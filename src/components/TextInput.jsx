@@ -1,3 +1,4 @@
+import { ErrorMessage } from "formik";
 import React from "react";
 
 const TextInput = ({
@@ -10,12 +11,21 @@ const TextInput = ({
   handleOnChange,
   handleOnBlur,
   Icon,
+  error = { isError: false, errorMessage: "" },
+  isRequired = false,
 }) => {
+  const inputClassName = Icon
+    ? `input-with-icon ${error?.isError ? "error" : undefined}`
+    : `input-without-icon ${error?.isError ? "error" : undefined}`;
+
   return (
     <div className="input-group">
-      <label htmlFor="email">{label}</label>
+      <label htmlFor="email" className="hello">
+        {label}{" "}
+        {isRequired && <span className="input-group--mandatory">*</span>}
+      </label>
       <input
-        className={Icon ? "input-with-icon" : "input-without-icon"}
+        className={inputClassName}
         type={type}
         name={name}
         id={id}
@@ -25,6 +35,10 @@ const TextInput = ({
         onBlur={handleOnBlur}
       />
       {Icon && <Icon className="input-group--start-icon" />}
+
+      {error?.isError && (
+        <span className="input-group--error-message">{error.errorMessage}</span>
+      )}
     </div>
   );
 };

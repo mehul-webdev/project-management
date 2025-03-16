@@ -3,8 +3,26 @@ import React from "react";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
 import TextInput from "./TextInput";
 import PasswordInput from "./PasswordInput";
+import { Link } from "react-router-dom";
+import * as Yup from "yup";
+import CheckboxInput from "./CheckboxInput";
+
+import { useDispatch } from "react-redux";
+import { handleSingUpWithEmailAndPassword } from "../store/authenticationHelper";
+import { signUpFormValidationSchema } from "./helpers/authenticationValidationSchema";
 
 const SignUp = () => {
+  const dispatch = useDispatch();
+
+  async function handleLogin(values, setSubmitting) {
+    const { email, password, name } = values;
+    console.log("here working inside component");
+
+    dispatch(
+      handleSingUpWithEmailAndPassword({ email, password, setSubmitting, name })
+    );
+  }
+
   return (
     <>
       <div className="authentication--form__title">
@@ -29,11 +47,12 @@ const SignUp = () => {
           password: "",
           name: "",
           confirmPassword: "",
+          terms: false,
         }}
         onSubmit={(values, { setSubmitting }) => {
           handleLogin(values, setSubmitting);
         }}
-        validate={(values) => handleValidation(values)}
+        validationSchema={signUpFormValidationSchema}
       >
         {(formik) => (
           <form
@@ -49,6 +68,12 @@ const SignUp = () => {
               value={formik.values.name}
               handleOnChange={formik.handleChange}
               handleOnBlur={formik.handleBlur}
+              error={
+                formik.touched.name && formik.errors.name
+                  ? { isError: true, errorMessage: formik.errors.name }
+                  : { isError: false, errorMessage: "" }
+              }
+              isRequired={true}
             />
 
             <TextInput
@@ -60,6 +85,12 @@ const SignUp = () => {
               value={formik.values.email}
               handleOnChange={formik.handleChange}
               handleOnBlur={formik.handleBlur}
+              error={
+                formik.touched.email && formik.errors.email
+                  ? { isError: true, errorMessage: formik.errors.email }
+                  : { isError: false, errorMessage: "" }
+              }
+              isRequired={true}
             />
 
             <div className="authentication--form__confirm-password">
@@ -71,6 +102,12 @@ const SignUp = () => {
                 value={formik.values.password}
                 handleOnChange={formik.handleChange}
                 handleOnBlur={formik.handleBlur}
+                error={
+                  formik.touched.password && formik.errors.password
+                    ? { isError: true, errorMessage: formik.errors.password }
+                    : { isError: false, errorMessage: "" }
+                }
+                isRequired={true}
               />
 
               <PasswordInput
@@ -78,28 +115,52 @@ const SignUp = () => {
                 name="confirmPassword"
                 id="confirmPassword"
                 placeholder="Confirm Password"
-                value={formik.values.password}
+                value={formik.values.confirmPassword}
                 handleOnChange={formik.handleChange}
                 handleOnBlur={formik.handleBlur}
+                error={
+                  formik.touched.confirmPassword &&
+                  formik.errors.confirmPassword
+                    ? {
+                        isError: true,
+                        errorMessage: formik.errors.confirmPassword,
+                      }
+                    : { isError: false, errorMessage: "" }
+                }
+                isRequired={true}
               />
             </div>
-            <div className="input-inline">
-              <input type="checkbox" name="rememberMe" id="rememberMe" />
-              <label htmlFor="rememberMe">
-                I accept the <a href="#">terms</a> and{" "}
-                <a href="#">privacy policy</a>
-              </label>
-            </div>
+            <CheckboxInput
+              name="terms"
+              id="terms"
+              handleOnChange={formik.handleChange}
+              error={
+                formik.touched.terms && formik.errors.terms
+                  ? {
+                      isError: true,
+                      errorMessage: formik.errors.terms,
+                    }
+                  : { isError: false, errorMessage: "" }
+              }
+            >
+              I accept the <a href="#">terms</a> and{" "}
+              <a href="#">privacy policy</a>
+            </CheckboxInput>
+
             <button
-              className="btn btn-primary margin-4"
+              className="btn btn-primary"
               type="submit"
               disabled={formik.isSubmitting}
             >
               Sign Up
             </button>
-            <a href="#" className="authentication--form__create-link link">
+
+            <Link
+              to="/auth/sign-in"
+              className="authentication--form__create-link link"
+            >
               Sign in to an existing account
-            </a>
+            </Link>
           </form>
         )}
       </Formik>

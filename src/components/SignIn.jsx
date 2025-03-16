@@ -5,22 +5,18 @@ import { FaRegUser } from "react-icons/fa6";
 import TextInput from "./TextInput";
 import PasswordInput from "./PasswordInput";
 import { IoKeyOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
+import { handleSignInWithEmailAndPassword } from "../store/authenticationHelper";
+import { useDispatch } from "react-redux";
+import { signInSchema } from "./helpers/authenticationValidationSchema";
 
 const SignIn = () => {
-  const handleLogin = (values, setSubmitting) => {
-    setTimeout(() => {
-      setSubmitting(false);
-    }, 400);
-  };
-
-  const handleValidation = (values) => {
-    const errors = {};
-    if (!values.email) {
-      errors.email = "Required";
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      errors.email = "Invalid email address";
-    }
-    return errors;
+  const dispatch = useDispatch();
+  const handleLogin = async (values, setSubmitting) => {
+    const { email, password } = values;
+    dispatch(
+      handleSignInWithEmailAndPassword({ email, password, setSubmitting })
+    );
   };
 
   return (
@@ -44,10 +40,10 @@ const SignIn = () => {
 
       <Formik
         initialValues={{ email: "", password: "" }}
-        onSubmit={(values, { setSubmitting }) => {
-          handleLogin(values, setSubmitting);
+        onSubmit={(values, { setSubmitting, setErrors }) => {
+          handleLogin(values, setSubmitting, setErrors);
         }}
-        validate={(values) => handleValidation(values)}
+        validationSchema={signInSchema}
       >
         {(formik) => (
           <form
@@ -64,6 +60,12 @@ const SignIn = () => {
               handleOnChange={formik.handleChange}
               handleOnBlur={formik.handleBlur}
               Icon={FaRegUser}
+              error={
+                formik.touched.email && formik.errors.email
+                  ? { isError: true, errorMessage: formik.errors.email }
+                  : { isError: false, errorMessage: "" }
+              }
+              isRequired={true}
             />
 
             <PasswordInput
@@ -75,6 +77,12 @@ const SignIn = () => {
               handleOnChange={formik.handleChange}
               handleOnBlur={formik.handleBlur}
               Icon={IoKeyOutline}
+              error={
+                formik.touched.password && formik.errors.password
+                  ? { isError: true, errorMessage: formik.errors.password }
+                  : { isError: false, errorMessage: "" }
+              }
+              isRequired={true}
             />
 
             <div className="authentication--form__actions">
@@ -91,11 +99,14 @@ const SignIn = () => {
               type="submit"
               disabled={formik.isSubmitting}
             >
-              Sign In
+              {formik.isSubmitting ? "loading..." : "Sign In"}
             </button>
-            <a href="#" className="authentication--form__create-link link">
+            <Link
+              to="/auth/sign-up"
+              className="authentication--form__create-link link"
+            >
               Create an account
-            </a>
+            </Link>
           </form>
         )}
       </Formik>
