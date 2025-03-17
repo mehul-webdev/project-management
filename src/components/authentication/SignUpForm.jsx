@@ -37,7 +37,6 @@ const SignUpForm = () => {
       >
         {(formik) => (
           <form onSubmit={formik.handleSubmit} className="flex flex-col gap-5">
-            {console.log("here working", formik)}
             <div className="w-full flex flex-col gap-2">
               <Label htmlFor="name" className="mx-2">
                 Full Name

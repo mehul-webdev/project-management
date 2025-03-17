@@ -1,7 +1,10 @@
 import React from "react";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { handleSignInWithGoogle } from "../../store/authenticationHelper";
+import {
+  handleSignInWithGithub,
+  handleSignInWithGoogle,
+} from "../../store/authenticationHelper";
 import { useDispatch } from "react-redux";
 import { Button } from "../ui/button";
 import SignInForm from "./SignInForm";
@@ -11,6 +14,10 @@ const SignIn = () => {
 
   const handleGoogleLogin = () => {
     dispatch(handleSignInWithGoogle());
+  };
+
+  const handleGithubLogin = () => {
+    dispatch(handleSignInWithGithub());
   };
 
   return (
@@ -24,11 +31,15 @@ const SignIn = () => {
         <Button
           variant="outline"
           className="cursor-pointer"
-          onClick={() => handleGoogleLogin()}
+          onClick={handleGoogleLogin}
         >
           <FaGoogle className="text-[#EA4335]" />
         </Button>
-        <Button variant="outline" className="cursor-pointer">
+        <Button
+          variant="outline"
+          className="cursor-pointer"
+          onClick={handleGithubLogin}
+        >
           <FaGithub />
         </Button>
       </div>

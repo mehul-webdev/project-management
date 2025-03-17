@@ -10,7 +10,6 @@ const Dashboard = () => {
 
     signOut(auth)
       .then(() => {
-        console.log("logout");
         navigate("/auth/sign-in", { replace: true });
       })
       .catch((error) => {
@@ -19,8 +18,8 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="bg-foreground h-screen">
-      <button onClick={handleLogout}>Logout</button>
+    <div className="">
+      <h2 className="text-4xl font-bold">Dashboard</h2>
     </div>
   );
 };

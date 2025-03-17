@@ -18,16 +18,19 @@ import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../context/ThemeProvider";
 
 import { Button } from "../ui/button";
+import { FaRegUser } from "react-icons/fa";
+import { GoSun } from "react-icons/go";
+import { BiMoon } from "react-icons/bi";
+import { CiLogout } from "react-icons/ci";
+import { useDispatch } from "react-redux";
+import { uiActions } from "../../store/ui/uiSlice";
 
 const MainNavigation = () => {
   const { theme, setTheme } = useTheme();
+  const dispatch = useDispatch();
 
   function handleThemeChange() {
-    if (theme === "light") {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
+    setTheme(theme === "dark" ? "light" : "dark");
   }
 
   const navigate = useNavigate();
@@ -43,22 +46,30 @@ const MainNavigation = () => {
       });
   }
 
+  function toggleSidebar() {
+    dispatch(uiActions.toggleSidebar());
+  }
+
   return (
-    <header className="px-4 py-3 md:px-8 md:py-4 shadow-xl bg-background">
-      <nav className="flex gap-4 items-center justify-between">
-        {/* Left Side - Logo & Menu */}
-        <div className="flex items-center gap-4">
-          <RxHamburgerMenu className="text-3xl block md:hidden cursor-pointer" />
+    <header className="px-4 py-3 md:px-4 md:py-4 shadow-xs bg-[var(--navigation)] border-b-2">
+      <nav className="flex gap-8 items-center justify-between">
+        <div className="flex items-center gap-8">
+          <RxHamburgerMenu
+            className="text-3xl cursor-pointer"
+            onClick={toggleSidebar}
+          />
           <img src={Logo} alt="logo" className="h-[45px]" />
         </div>
 
-        {/* Right Side - Avatar & Dropdown */}
         <div className="flex items-center">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="p-0 rounded-full">
                 <Avatar>
-                  <AvatarImage src={DummyProfile} alt="user profile" />
+                  <AvatarImage
+                    src={`https://lh3.googleusercontent.com/a/ACg8ocKbPHjGC9QMYeX8WXw8UOQNoDei1dWQbHsbm6QK1sDnz-2iXQ=s96-c`}
+                    alt="user profile"
+                  />
                   <AvatarFallback>Profile</AvatarFallback>
                 </Avatar>
               </Button>
@@ -68,19 +79,20 @@ const MainNavigation = () => {
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="cursor-pointer">
-                Profile
+                <FaRegUser /> Profile
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="cursor-pointer"
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                onClick={handleThemeChange}
               >
+                {theme === "dark" ? <BiMoon /> : <GoSun />}
                 Toggle Theme
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="cursor-pointer text-red-500"
                 onClick={handleLogout}
               >
-                Logout
+                <CiLogout className="text-red-500" /> Logout
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

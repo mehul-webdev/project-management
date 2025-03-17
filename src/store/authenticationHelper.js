@@ -23,6 +23,7 @@ export const getUserUsingUid = async (uid) => {
   }
 };
 
+// Email and password
 export const handleSignInWithEmailAndPassword = createAsyncThunk(
   "authentication/handleSignIn",
   async ({ email, password, setSubmitting }, { rejectWithValue }) => {
@@ -68,6 +69,7 @@ export const handleSingUpWithEmailAndPassword = createAsyncThunk(
   }
 );
 
+// Google
 export const handleSignUpWithGoogle = createAsyncThunk(
   "authentication/handleSignUpWithGoogle",
   async (_, { rejectWithValue }) => {
@@ -121,6 +123,7 @@ export const handleSignInWithGoogle = createAsyncThunk(
   }
 );
 
+// Github Login
 export const handleSignUpWithGithub = createAsyncThunk(
   "authentication/handleSignUpWithGithub",
   async (_, { rejectWithValue }) => {
@@ -149,6 +152,27 @@ export const handleSignUpWithGithub = createAsyncThunk(
       };
     } catch (e) {
       console.log("Error while singup with github", e);
+    }
+  }
+);
+
+export const handleSignInWithGithub = createAsyncThunk(
+  "authentication/handleSignInWithGithub",
+  async (_, { rejectWithValue }) => {
+    try {
+      const result = await signInWithPopup(auth, githubProvider);
+
+      const user = result.user;
+
+      if (user) {
+        const uid = user.uid;
+        const userData = await getUserUsingUid(uid);
+        return userData;
+      } else {
+        return rejectWithValue("No user available");
+      }
+    } catch (e) {
+      console.log("error while login using google", e);
     }
   }
 );

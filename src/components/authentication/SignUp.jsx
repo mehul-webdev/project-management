@@ -35,8 +35,12 @@ const SignUp = () => {
         >
           <FaGoogle className="text-[#EA4335]" />
         </Button>
-        <Button variant="outline" className="cursor-pointer">
-          <FaGithub onClick={() => handleGithubLogin()} />
+        <Button
+          variant="outline"
+          className="cursor-pointer"
+          onClick={() => handleGithubLogin()}
+        >
+          <FaGithub />
         </Button>
       </div>
 

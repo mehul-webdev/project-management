@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
@@ -6,9 +6,11 @@ import { auth } from "../config/firebaseConfig";
 import { getUserUsingUid } from "../store/authenticationHelper";
 import { authAction } from "../store/authentication";
 import MainNavigation from "../components/mainNavigation/MainNavigation";
+import { Button } from "../components/ui/button";
+
+import SideBarNavigation from "../components/sideBarNavigation/SideBarNavigation";
 
 const PageLayout = () => {
-  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const previousUserRef = useRef(null);
@@ -29,13 +31,18 @@ const PageLayout = () => {
       }
     });
     return () => unsubscribe();
-  }, [user]);
+  }, []);
 
   return (
     <>
       <MainNavigation />
       <main>
-        <Outlet />
+        <div className="flex">
+          <SideBarNavigation />
+          <div className="flex-1 p-8">
+            <Outlet />
+          </div>
+        </div>
       </main>
     </>
   );
